@@ -1,0 +1,19 @@
+name: data_deal_dev
+push_hour: 01
+push_day: 2023-02-03
+is_supplementary_push: False
+SourceNewsPath: /
+mysql:
+  host: "127.0.0.1"
+  port: 6379
+  user: "root"
+  password: "123456"
+  setKey: "news:md5Set"
+log:
+  level: "debug"
+  filename: "deal_news.log"
+  max_size: 200
+  max_age: 30
+  max_backups: 5
+
+
