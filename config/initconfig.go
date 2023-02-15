@@ -1,7 +1,7 @@
 package config
 
 import (
-	"data_push/serivce/util"
+	"data_push/serivce/util/filetools"
 	"fmt"
 	"github.com/fsnotify/fsnotify"
 	"github.com/golang-module/carbon"
@@ -36,18 +36,19 @@ func InitConfig(env string) {
 	}
 
 	Config.VideoPath = filepath.Join(rootPath, "news_video")
-	util.MkAllDir(Config.VideoPath)
+	filetools.MkAllDir(Config.VideoPath)
 	//是否补推
 	isSupp := v.Get("is_supplementary_push")
 	if !isSupp.(bool) {
 		Config.PushHour = strconv.Itoa(carbon.Now().Hour())
 		Config.PushDay = carbon.Now().ToDateString()
 	}
+	Config.DayHours = fmt.Sprintf("%s%s", carbon.Now().ToShortDateString(), Config.PushHour)
 	Config.DataPath = filepath.Join(rootPath, fmt.Sprintf("news-%s", Config.PushHour))
 	Config.ZipPath = filepath.Join(rootPath, "54_data")
-	util.MkAllDir(Config.ZipPath)
+	filetools.MkAllDir(Config.ZipPath)
 	Config.JsonSavePath = filepath.Join(rootPath, "hours_data")
-	util.MkAllDir(Config.JsonSavePath)
+	filetools.MkAllDir(Config.JsonSavePath)
 
 	//配置热加载
 	viper.WatchConfig()

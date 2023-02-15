@@ -1,5 +1,8 @@
 package config
 
+import "github.com/go-redis/redis"
+
 var (
-	Config *ServerConfig
+	Config  *ServerConfig
+	RedisDb *redis.Client
 )

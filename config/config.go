@@ -2,10 +2,11 @@ package config
 
 type ServerConfig struct {
 	Name                string `mapstructure:"name" json:"name,omitempty"`
-	*RedisConfig        `mapstructure:"mysql" json:"*_mysql_config,omitempty"`
+	*RedisConfig        `mapstructure:"redis" json:"*redis,omitempty"`
 	*LogConfig          `mapstructure:"log" json:"*_log_config,omitempty"`
 	PushHour            string `json:"push_hour"`             // 推送哪个小时的数据 ex 01 02 03 .....
 	PushDay             string `json:"push_day"`              // 推送哪天的数据 ex:2023-02-03
+	DayHours            string `json:"day_hours"`             // ex: 2023020301
 	SourceNewsPath      string `json:"source_news_path"`      //原始新闻数据存放路径
 	VideoPath           string `json:"video_path"`            //视频保存路径
 	IsSupplementaryPush bool   `json:"is_supplementary_push"` //是否补推数据
@@ -18,7 +19,7 @@ type RedisConfig struct {
 	Host     string `json:"host" mapstructure:"host"`
 	Port     int    `json:"port" mapstructure:"port"`
 	Password string `json:"password" mapstructure:"password"`
-	Db       string `json:"db" mapstructure:"db"`
+	Db       int    `json:"db" mapstructure:"db"`
 	SetKey   string `json:"setKey"`
 }
 

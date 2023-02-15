@@ -3,7 +3,7 @@ push_hour: 01
 push_day: 2023-02-03
 is_supplementary_push: False
 SourceNewsPath: /
-mysql:
+redis:
   host: "127.0.0.1"
   port: 6379
   user: "root"

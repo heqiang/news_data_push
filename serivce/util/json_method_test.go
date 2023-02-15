@@ -6,8 +6,6 @@ import (
 )
 
 func TestReadJson(t *testing.T) {
-	newsList := ReadJson("E:\\goproject\\data_push\\serivce\\util\\test.json")
-	for _, k := range newsList {
-		fmt.Println(k.URL)
-	}
+	newsList := ReadJsonFile("/Users/hq/GolandProjects/data_push/serivce/util/test.json")
+	fmt.Println(newsList)
 }

@@ -1,7 +1,9 @@
 package data_deal
 
 import (
+	"data_push/config"
 	"data_push/serivce/util"
+	"data_push/serivce/util/filetools"
 	"encoding/json"
 	"fmt"
 	mapset "github.com/deckarep/golang-set"
@@ -20,7 +22,7 @@ func FilterNews(dstPath string) {
 	dropNewsCount := 0
 	removeNewsName := ""
 
-	dataList := util.ListDir(dstPath)
+	dataList := filetools.ListDir(dstPath)
 	if len(dataList) > 0 {
 		allNews := make([]map[string]interface{}, 0)
 		for _, v := range dataList {
@@ -84,7 +86,7 @@ func FilterNews(dstPath string) {
 				}
 			}
 		}
-		util.WriteJson(allNews, dstPath)
+		util.WriteJson(allNews, dstPath, fmt.Sprintf("%s_filter.json", config.Config.DayHours))
 	}
 	if removeNewsName != "" {
 		//删除json文件

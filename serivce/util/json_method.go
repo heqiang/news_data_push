@@ -7,6 +7,7 @@ import (
 	"go.uber.org/zap"
 	"io"
 	"os"
+	"path/filepath"
 )
 
 func ReadJsonFile(jsonPath string) []string {
@@ -31,8 +32,8 @@ func ReadJsonFile(jsonPath string) []string {
 	return newsList
 }
 
-func WriteJson(jsonData []map[string]interface{}, jsonFilePath string) {
-	dstFile, err := os.OpenFile(jsonFilePath, os.O_APPEND, 0666)
+func WriteJson(jsonData []map[string]interface{}, jsonFilePath, fileName string) {
+	dstFile, err := os.OpenFile(filepath.Join(jsonFilePath, fileName), os.O_APPEND, 0666)
 	if err != nil {
 		zap.L().Warn("新闻json写入失败")
 		return
@@ -43,7 +44,7 @@ func WriteJson(jsonData []map[string]interface{}, jsonFilePath string) {
 		if err != nil {
 			return
 		}
-		_, err = io.WriteString(dstFile, string(vBytes))
+		_, err = io.WriteString(dstFile, string(vBytes)+"\n")
 		if err != nil {
 			return
 		}
